@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'scala'
+    id "com.github.lkishalmi.gatling" version "3.0.2"
 }
 
 group 'com.bharathk'
@@ -7,13 +9,19 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/io.cucumber/cucumber-core
+    //gatling
+    implementation 'org.scala-lang:scala-library:2.12.8'
+
+    //
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'com.intuit.karate', name: 'karate-apache', version: '0.9.3'
     testCompile group: 'com.intuit.karate', name: 'karate-junit4', version: '0.9.3'
+    testCompile group: 'com.intuit.karate', name: 'karate-gatling', version: '0.9.3'
+    testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '3.0.2'
 }
 
 sourceSets {
@@ -33,3 +41,28 @@ test {
     // ensure tests are always run
     outputs.upToDateWhen { false }
 }
+
+gatling {
+    toolVersion = '3.0.2'
+    simulations = {
+        include "**/feature/*Simulation.scala"
+    }
+//    jvmArgs = [ '-server', '-Xms512M', '-Xmx512M' ]
+}
+
+//task gatlingRun(type: JavaExec) {
+//    group = 'Web Tests'
+//    description = 'Run Gatling Tests'
+//
+//    new File("${buildDir}/reports/gatling").mkdirs()
+//
+//    classpath = sourceSets.test.runtimeClasspath
+//
+//    main = "io.gatling.app.Gatling"
+//    args = [
+//            '-s', 'EmployeeSimulation',
+//            '-rf', "${buildDir}/reports/gatling"
+//    ]
+//    systemProperties System.properties
+//}
+

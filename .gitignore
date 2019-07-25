@@ -5,3 +5,5 @@ gradlew
 gradlew.bat
 out/
 target/
+build/
+project/
