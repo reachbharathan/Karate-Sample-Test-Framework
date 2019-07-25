@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'com.bharathk'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-core
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'com.intuit.karate', name: 'karate-apache', version: '0.9.3'
+    testCompile group: 'com.intuit.karate', name: 'karate-junit4', version: '0.9.3'
+}
+
+sourceSets {
+    test {
+        resources {
+            srcDir file('src/test/java')
+            exclude '**/*.java'
+        }
+    }
+}
+
+test {
+    // pull karate options into the runtime
+    systemProperty "karate.options", System.properties.getProperty("karate.options")
+    // pull karate env into the runtime
+    systemProperty "karate.env", System.properties.getProperty("karate.env")
+    // ensure tests are always run
+    outputs.upToDateWhen { false }
+}
