@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'scala'
-    id "com.github.lkishalmi.gatling" version "3.0.2"
+//    id "com.github.lkishalmi.gatling" version "3.0.2"
 }
 
 group 'com.bharathk'
@@ -22,13 +22,13 @@ dependencies {
     testCompile group: 'com.intuit.karate', name: 'karate-junit4', version: '0.9.3'
     testCompile group: 'com.intuit.karate', name: 'karate-gatling', version: '0.9.3'
     testCompile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '3.0.2'
+    testCompile "io.gatling:gatling-app:3.0.2"
 }
 
 sourceSets {
     test {
         resources {
-            srcDir file('src/test/java')
-            exclude '**/*.java'
+            srcDirs = ['src/test/resources', 'src/test/java']
         }
     }
 }
@@ -42,27 +42,18 @@ test {
     outputs.upToDateWhen { false }
 }
 
-gatling {
-    toolVersion = '3.0.2'
-    simulations = {
-        include "**/feature/*Simulation.scala"
-    }
-//    jvmArgs = [ '-server', '-Xms512M', '-Xmx512M' ]
+task gatlingRun(type: JavaExec) {
+    group = 'Web Tests'
+    description = 'Run Gatling Tests'
+
+    new File("${buildDir}/reports/gatling").mkdirs()
+
+    classpath = sourceSets.test.runtimeClasspath
+
+    main = "io.gatling.app.Gatling"
+    args = [
+            '-s', 'features.EmployeeSimulation',
+            '-rf', "${buildDir}/reports/gatling"
+    ]
+    systemProperties System.properties
 }
-
-//task gatlingRun(type: JavaExec) {
-//    group = 'Web Tests'
-//    description = 'Run Gatling Tests'
-//
-//    new File("${buildDir}/reports/gatling").mkdirs()
-//
-//    classpath = sourceSets.test.runtimeClasspath
-//
-//    main = "io.gatling.app.Gatling"
-//    args = [
-//            '-s', 'EmployeeSimulation',
-//            '-rf', "${buildDir}/reports/gatling"
-//    ]
-//    systemProperties System.properties
-//}
-
