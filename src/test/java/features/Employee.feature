@@ -9,19 +9,9 @@ Feature: Validate employee service
     * print '**************'
     * print 'headers:'
     * print responseTime
-    Then assert responseTime < 500
-
-
-  Scenario: Get one employee details
-    Given url 'http://dummy.restapiexample.com/api/v1/employee/53579'
-    When method GET
-    Then status 200
-    And match $ contains {id:'53579'}
-    Then match $ == {id:'53579',employee_name:'testbharath3',employee_salary:'1000',employee_age:'21',profile_image:''}
-
+    Then assert responseTime < 1000
 
   Scenario: Create, Retriev and Delete employee details
-
     Given url 'http://dummy.restapiexample.com/api/v1/create'
     And request {name:'test-sample-1',salary:'1000',age:'21'}
     When method POST
