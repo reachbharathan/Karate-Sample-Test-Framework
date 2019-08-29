@@ -1,6 +1,6 @@
 # Events Component Test
 
-[![CircleCI](https://circleci.com/gh/reachbharathan/Karate-Sample-Test-Framework.svg?style=svg)](https://circleci.com/gh/reachbharathan/Karate-Sample-Test-Framework)
+[![CircleCI](https://d3r49iyjzglexf.cloudfront.net/logo-wordmark-black-7fec8eb34f3f7d8a2d75b22e789bca438ae7f6174a7949784054e726c5acdccb.svg)](https://circleci.com/gh/reachbharathan/Karate-Sample-Test-Framework.svg?style=svg)](https://circleci.com/gh/reachbharathan/Karate-Sample-Test-Framework)
 ### Setup
 1. run `gradle build`
 Require [gradle](https://gradle.org/) and [Maven](http://maven.apache.org/) (only for performance test executeion)
