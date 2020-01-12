@@ -1,9 +1,16 @@
-.gradle/
-.idea/*
-.idea
-gradlew
-gradlew.bat
+#java 
+.classpath
 out/
 target/
 build/
 project/
+bin/
+.project
+.settings/
+
+# editors
+.vscode/
+.gradle/
+.idea/*
+.idea
+
